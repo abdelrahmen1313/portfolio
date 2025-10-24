@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Name Here | Digital Experiences</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #1e293b;
+        --text-color: #334155;
+        --light-color: #f8fafc;
+        --border-color: #e2e8f0;
+
+        --gradient-primary: linear-gradient(
+          135deg,
+          hsl(262, 83%, 58%) 0%,
+          hsl(220, 70%, 50%) 100%
+        );
+        --gradient-accent: linear-gradient(
+          135deg,
+          hsl(280, 85%, 65%) 0%,
+          hsl(262, 83%, 58%) 100%
+        );
+        --gradient-hero: linear-gradient(
+          135deg,
+          hsl(262, 83%, 58%) 0%,
+          hsl(220, 70%, 50%) 50%,
+          hsl(280, 85%, 65%) 100%
+        );
+        --gradient-subtle: linear-gradient(
+          180deg,
+          hsl(250, 100%, 98%) 0%,
+          hsl(250, 50%, 97%) 100%
+        );
+
+        --shadow-glow: 0 0 60px hsla(262, 83%, 58%, 0.3);
+        --shadow-soft: 0 4px 20px hsla(250, 20%, 10%, 0.08);
+
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body {
+        position: relative;
+        overflow-x: hidden;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      /* Background with multiple gradient circles */
+      body::before,
+      body::after,
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Central blushy circle */
+      body::before {
+        background: radial-gradient(
+          ellipse at center,
+          rgba(137, 241, 255, 0.466) 0%,
+          rgba(0, 0, 0, 0.007) 60%,
+          rgba(121, 121, 121, 0) 90% hsl(250, 50%, 97%) 100%
+        );
+        background-blend-mode: soft-light;
+        background-size: cover;
+        animation: gradientMove 15s ease infinite;
+      }
+
+      /* First diagonal blushy circle */
+      body::after {
+        background: radial-gradient(
+          ellipse at 30% 30%,
+          rgba(255, 182, 193, 0.4) 0%,
+          rgba(255, 182, 193, 0.1) 40%,
+          rgba(255, 182, 193, 0) 70%
+                    hsl(250, 50%, 97%) 100%
+
+        );
+        background-blend-mode: soft-light;
+        animation: diagonalMove1 20s ease infinite;
+      }
+
+      /* Second diagonal blushy circle */
+      body::after {
+        background: radial-gradient(
+          ellipse at 70% 70%,
+          rgba(173, 216, 230, 0.4) 0%,
+          rgba(173, 216, 230, 0.1) 40%,
+          rgba(173, 216, 230, 0) 70%
+        );
+        background-blend-mode: soft-light;
+        animation: diagonalMove2 25s ease infinite;
+      }
+
+      /* Animation for central circle */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Animation for first diagonal circle */
+      @keyframes diagonalMove1 {
+        0% {
+          background-position: 30% 30%;
+        }
+        33% {
+          background-position: 60% 60%;
+        }
+        66% {
+          background-position: 20% 70%;
+        }
+        100% {
+          background-position: 30% 30%;
+        }
+      }
+
+      /* Animation for second diagonal circle */
+      @keyframes diagonalMove2 {
+        0% {
+          background-position: 70% 70%;
+        }
+        33% {
+          background-position: 40% 40%;
+        }
+        66% {
+          background-position: 80% 30%;
+        }
+        100% {
+          background-position: 70% 70%;
+        }
+      }
+
+      /* Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .top-tag {
+        border: 1px solid #1e293b;
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Header */
+      header {
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        max-width: 600px;
+        margin: 0 auto 40px;
+        color: var(--text-color);
+      }
+
+      .divider {
+        height: 1px;
+        width: 100px;
+        background-color: var(--border-color);
+        margin: 0 auto 40px;
+      }
+
+      /* Buttons */
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 60px;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--secondary-color);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--light-color);
+        transform: translateY(-2px);
+      }
+
+      /* Skills Section */
+      .skills {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .skill-tag {
+        padding: 8px 16px;
+        background-color: var(--light-color);
+        border-radius: 20px;
+        font-weight: 600;
+        color: var(--secondary-color);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(5px);
+      }
+
+      /* Footer */
+      footer {
+        padding: 40px 0;
+        text-align: center;
+        border-top: 1px solid var(--border-color);
+        margin-top: 80px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .footer-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .copyright {
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--div class="container">
+            <div class="logo">Your  Here</div>
+        </div -->
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+            <div style="margin-bottom: 2rem;">
+            <span class="skill-tag">
+                Full Stack Developer
+            </span>
+            </div>
+          <h1>Your Name Here</h1>
+          <p>
+            Crafting beautiful digital experiences with modern web technologies.
+            Passionate about clean code and innovative solutions.
+          </p>
+          <div class="divider"></div>
+          <div class="buttons">
+            <a href="#" class="btn btn-primary">View My Projects →</a>
+            <a href="#" class="btn btn-secondary">View Source</a>
+          </div>
+          <div class="skills">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-links">
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+          <a href="#">Email</a>
+        </div>
+        <p class="copyright">© 2023 Your Name Here. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Simple JavaScript for interactive elements
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add smooth scrolling for anchor links
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+        anchorLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Add hover effect to skill tags
+        const skillTags = document.querySelectorAll(".skill-tag");
+
+        skillTags.forEach((tag) => {
+          tag.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-2px)";
+            this.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+          });
+
+          tag.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+            this.style.boxShadow = "none";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
